@@ -1,0 +1,56 @@
+﻿
+
+@model HayvanlarTurCinsViewModel
+@{
+    ViewData["Title"] = Model.Turler.Where(x=>x.TurId==Model.Hayvanlar[0].TurId).FirstOrDefault().TurAdi;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row mt-5">
+
+    <div class="col-lg-3 mb-5">
+        <div class="list-group">
+            <a asp-controller="Home" asp-action="Sahiplenme" class="list-group-item list-group-item-action bg-secondary text-light">
+                Hayvan Kategorileri
+            </a>
+            @foreach (var tur in Model.Turler)
+            {
+                <a asp-controller="Home" asp-action="TurDetay" asp-route-id="@tur.TurId" class="list-group-item list-group-item-action">@tur.TurAdi</a>
+            }
+
+        </div>
+
+    </div>
+    <!-- /.col-lg-3 -->
+
+    <div class="col-lg-9">
+
+
+
+        <div class="row">
+            @foreach (var hayvan in Model.Hayvanlar)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a asp-controller="Home" asp-action="SahiplenmeDetay" asp-route-id="@hayvan.HayvanId"><img class="card-img-top" src="@hayvan.Foto" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a asp-controller="Home" asp-action="SahiplenmeDetay" asp-route-id="@hayvan.HayvanId">@hayvan.Adi</a>
+                            </h4>
+                            <h5>@hayvan.Tur.TurAdi</h5>
+                            <p class="card-text">@hayvan.EkBilgiler</p>
+                        </div>
+                        <div class="card-footer">
+                            <a type="button" class="btn btn-secondary float-right" asp-controller="Home" asp-action="SahiplenmeDetay" asp-route-id="@hayvan.HayvanId">Sahiplen</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.col-lg-9 -->
+
+</div>
+

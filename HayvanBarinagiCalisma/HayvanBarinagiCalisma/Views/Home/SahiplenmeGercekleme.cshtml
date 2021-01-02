@@ -1,0 +1,51 @@
+﻿@using HayvanBarinagiCalisma.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Sahiplen"] = SharedLocalizer.GetLocalizedHtmlString("Sahiplen");
+    ViewData["Cinsiyet"] = SharedLocalizer.GetLocalizedHtmlString("Cinsiyet");
+    ViewData["CErkek"] = SharedLocalizer.GetLocalizedHtmlString("CErkek");
+    ViewData["CDisi"] = SharedLocalizer.GetLocalizedHtmlString("CDisi");
+    ViewData["Yas"] = SharedLocalizer.GetLocalizedHtmlString("Yas");
+    ViewData["Tur"] = SharedLocalizer.GetLocalizedHtmlString("Tur");
+    ViewData["Cins"] = SharedLocalizer.GetLocalizedHtmlString("Cins");
+    ViewData["SahiplenmeGercekleme"] = SharedLocalizer.GetLocalizedHtmlString("SahiplenmeGercekleme");
+    ViewData["Tebrik"] = SharedLocalizer.GetLocalizedHtmlString("Tebrik");
+    ViewData["SahiplenmeDon"] = SharedLocalizer.GetLocalizedHtmlString("SahiplenmeDon");
+}
+@{
+    ViewData["Title"] = "Sahiplenme Gerçekleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
+@model Hayvan
+<div class="card m-auto w-75">
+    <div class="card-body text-center">
+        @ViewData["Tebrik"] @User.Identity.Name ! <b>@Model.Adi</b> @ViewData["SahiplenmeGercekleme"]
+    </div>
+    <img class="card-img-top" src="@Model.Foto" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Adi</h5>
+        <p class="card-text">@Model.EkBilgiler</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@ViewData["Tur"]: @ViewBag.Turu</li>
+        <li class="list-group-item">@ViewData["Cins"]: @ViewBag.Cinsi</li>
+        <li class="list-group-item">@ViewData["Yas"]: @Model.Yasi</li>
+        @if (Model.Cinsiyet)
+        {
+            <li class="list-group-item">@ViewData["Cinsiyet"]: @ViewData["CErkek"]</li>
+        }
+        else
+        {
+            <li class="list-group-item">@ViewData["Cinsiyet"]: @ViewData["CDisi"]</li>
+        }
+
+
+    </ul>
+    <div class="card-body text-center">
+        <a asp-controller="Home" asp-action="Sahiplenme" class="btn btn-outline-dark w-25">@ViewData["SahiplenmeDon"]</a>
+    </div>
+</div>
+

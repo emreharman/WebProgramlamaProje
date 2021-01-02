@@ -1,0 +1,38 @@
+﻿@using HayvanBarinagiCalisma.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["iletisimAd"] = SharedLocalizer.GetLocalizedHtmlString("iletisimAd");
+}
+@{
+    ViewData["Title"] = "İletişim";
+}
+@model Iletisim
+<div class="container mt-5">
+    <form class="w-75 m-auto" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Ad">@ViewData["iletisimAd"]</label>
+            <input asp-for="Ad" class="form-control" />
+            <span asp-validation-for="Ad" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Soyad">Soyadınız</label>
+            <input asp-for="Soyad" class="form-control" />
+            <span asp-validation-for="Soyad" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">E-Mail'iniz</label>
+            <input type="email" asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <small id="emailHelp" class="form-text text-muted">Mail adresiniz kimseyle paylaşılmayacaktır.</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Mesaj">Mesajınız</label>
+            <textarea class="form-control" asp-for="Mesaj" rows="3"></textarea>
+            <span asp-validation-for="Mesaj" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-dark float-right">Gönder</button>
+    </form>
+
+</div>
+

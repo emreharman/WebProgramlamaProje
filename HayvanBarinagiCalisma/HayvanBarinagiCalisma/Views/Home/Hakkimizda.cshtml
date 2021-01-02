@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Hakkımızda";
+}
+@using HayvanBarinagiCalisma.Resources
+@inject LocService SharedLocalizer
+@{ 
+    ViewData["BizKimiz"] = SharedLocalizer.GetLocalizedHtmlString("BizKimiz");
+    ViewData["HakkimizdaIcerik1"] = SharedLocalizer.GetLocalizedHtmlString("HakkimizdaIcerik1");
+    ViewData["HakkimizdaIcerik2"] = SharedLocalizer.GetLocalizedHtmlString("HakkimizdaIcerik2");
+    ViewData["KayitOl"] = SharedLocalizer.GetLocalizedHtmlString("KayitOl");
+    ViewData["SimdiSahiplen"] = SharedLocalizer.GetLocalizedHtmlString("SimdiSahiplen");
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
+<div class="jumbotron mt-5 shadow">
+    <h1 class="display-4">@ViewData["BizKimiz"]?</h1>
+    <p class="lead">
+        @ViewData["HakkimizdaIcerik1"]
+    </p>
+    <hr class="my-4">
+    <p>@ViewData["HakkimizdaIcerik2"]</p>
+    <p class="lead">
+        @if (!SignInManager.IsSignedIn(User))
+        {
+        <a class="btn btn-outline-dark btn-lg float-right" asp-area="Identity" asp-page="/Account/Register" role="button">@ViewData["KayitOl"]...</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-dark btn-lg float-right" asp-controller="Home" asp-action="Sahiplenme" role="button">@ViewData["SimdiSahiplen"]...</a>
+        }
+
+    </p>
+</div>

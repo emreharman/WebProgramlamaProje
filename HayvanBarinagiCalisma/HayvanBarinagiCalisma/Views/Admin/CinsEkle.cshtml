@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Cins Ekle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@model Cins
+<div class="container mt-5">
+    <h1 style="text-align:center;">Cins Ekle</h1>
+    <form class="w-75 m-auto" method="post">
+        <div class="form-group">
+            <label asp-for="CinsAdi"></label>
+            <input asp-for="CinsAdi" class="form-control" />
+            <span asp-validation-for="CinsAdi" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary float-right">Kaydet</button>
+    </form>
+
+</div>
+<div class="container mt-2">
+    <p class="w-75 text-primary text-center">@ViewBag.Mesaj</p>
+</div>

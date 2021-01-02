@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "Hayvan Düzenle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model HayvanlarTurCinsViewModel
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Hayvanlar</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Resim</th>
+                            <th>Adı</th>
+                            <th>Türü</th>
+                            <th>Cinsi</th>
+                            <th>Yaşı</th>
+                            <th>Cinsiyeti</th>
+                            <th>Ek Açıklama</th>
+                            <th>Sahiplenilme Durumu</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int i = 0;}
+                        @foreach (var hayvan in Model.Hayvanlar)
+                        {
+
+                        <tr>
+                            <td><img src="@hayvan.Foto" width="50" height="50" /></td>
+                            <td>@hayvan.Adi</td>
+                            <td>@Model.Turler.Where(x => x.TurId == hayvan.TurId).FirstOrDefault().TurAdi</td>
+                            <td>@Model.Cinsler.Where(x => x.CinsId == hayvan.CinsId).FirstOrDefault().CinsAdi</td>
+                            <td>@hayvan.Yasi</td>
+                            @if (hayvan.Cinsiyet)
+                            {
+                                <td>Erkek</td>
+                            }
+                            else
+                            {
+                                <td>Dişi</td>
+                            }
+                            <td>@hayvan.EkBilgiler</td>
+                            @if (hayvan.SahiplenildiMi)
+                            {
+                                <td>Sahiplenildi</td>
+                            }
+                            else
+                            {
+                                <td>Sahiplenilmedi</td>
+                            }
+                        <td>
+                            <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-action="HayvanSil" asp-route-id="@hayvan.HayvanId">Sil</a>
+                            <a class="btn btn-info btn-sm" asp-controller="Admin" asp-action="HayvanUpdate" asp-route-id="@hayvan.HayvanId">Güncelle</a>
+                        </td>
+                        </tr>
+                            i++;
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+

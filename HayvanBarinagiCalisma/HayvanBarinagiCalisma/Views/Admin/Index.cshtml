@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Admin Anasayfa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model List<Iletisim>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">İletişim Tablosu</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Sıra No</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>E-mail</th>
+                        <th>Mesaj</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 1;}
+                    @foreach (var bilgi in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@bilgi.Ad</td>
+                            <td>@bilgi.Soyad</td>
+                            <td>@bilgi.Email</td>
+                            <td>@bilgi.Mesaj</td>
+                            <td>@bilgi.Tarih.GetDateTimeFormats()[3]</td>
+                        </tr>
+                        i++;
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
